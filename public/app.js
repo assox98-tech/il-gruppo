@@ -14,12 +14,14 @@ const seed=[
 
 let messages=JSON.parse(localStorage.getItem('ilgruppo.messages')||'null')||seed;
 let mode=localStorage.getItem('ilgruppo.mode')||'demo';
+let apiUrl=localStorage.getItem('ilgruppo.apiUrl')||'';
 let usedReplies=JSON.parse(localStorage.getItem('ilgruppo.usedReplies')||'[]');
 const app=document.querySelector('#app');
 
 function save(){
   localStorage.setItem('ilgruppo.messages',JSON.stringify(messages));
   localStorage.setItem('ilgruppo.usedReplies',JSON.stringify(usedReplies.slice(-40)));
+  localStorage.setItem('ilgruppo.apiUrl',apiUrl);
 }
 
 function esc(s){
@@ -39,7 +41,8 @@ function render(){
   document.querySelector('#people').onclick=()=>document.querySelector('#panel').classList.remove('hidden');
   document.querySelector('#close').onclick=()=>document.querySelector('#panel').classList.add('hidden');
   document.querySelector('#clear').onclick=()=>{messages=[];usedReplies=[];save();render()};
-  document.querySelector('#mode').onchange=e=>{mode=e.target.value;localStorage.setItem('ilgruppo.mode',mode)};
+  document.querySelector('#mode').onchange=e=>{mode=e.target.value;save()};
+  document.querySelector('#saveApi').onclick=()=>{apiUrl=document.querySelector('#apiUrl').value.trim().replace(/\/$/,'');save();render()};
 }
 
 function addReply(who,text,delay){
