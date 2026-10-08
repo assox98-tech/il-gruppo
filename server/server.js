@@ -16,7 +16,7 @@ const client = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
 
-const model = process.env.OPENAI_MODEL || 'gpt-5.6';
+const model = process.env.OPENAI_MODEL || 'gpt-5.6-luna';
 
 const systemPrompt = `Sei il motore narrativo di "Il Gruppo", una chat privata realistica composta da Kevin, Matteo, Claudia, Lorenzo e Nora.
 
